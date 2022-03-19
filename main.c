@@ -93,14 +93,15 @@ BigInteger* bi_sum(BigInteger* left, BigInteger* right)
 	else ret->count = left->count > right->count ? left->count + 1 : right->count + 1;
 	ret->symbols = malloc(ret->count);
 	internal_bi_sum(left, right, ret);
-	if (*(ret->symbols + ret->count - 1) == 0) realloc(ret, ret->count = ret->count - 1);
+	if (*(ret->symbols + ret->count - 1) == 0) ret->count -= 1;
 	return ret;
 }
 
 int main(int argc, char *argv[])
 {
-	BigInteger* bi1 = bi_from_str("643655234523524624565425435436436456");
-	BigInteger* bi2 = bi_from_str("643655234523546426457425672456436456");
+	char* str1 = "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999";
+	BigInteger* bi1 = bi_from_str(str1);
+	BigInteger* bi2 = bi_from_str(str1);
 	
 	bi_print(bi1);
 	printf("\n");
