@@ -49,6 +49,21 @@ BigInteger* bi_from_int(int src)
 	return ret;
 }
 
+BigInteger* bi_from_str(char* str)
+{
+	BigInteger* ret = calloc(1, sizeof(BigInteger));
+	if (ret == NULL) exit(EXIT_FAILURE);
+	if (*str == '-') ret->negative = 1, str++;
+	int shift = 0;
+	while (*(str + shift)) shift++;
+	ret->count = shift;
+	bi_init(ret);
+	shift = 0;
+	while (shift < ret->count)
+		*(ret->symbols + ret->count - shift++ - 1) = *(str++) - '0';
+	return ret;
+}
+
 void bi_print(BigInteger* p)
 {
 	if (p->negative) printf("-");
@@ -84,8 +99,8 @@ BigInteger* bi_sum(BigInteger* left, BigInteger* right)
 
 int main(int argc, char *argv[])
 {
-	BigInteger* bi1 = bi_from_int(INT_MAX);
-	BigInteger* bi2 = bi_from_int(INT_MAX);
+	BigInteger* bi1 = bi_from_str("643655234523524624565425435436436456");
+	BigInteger* bi2 = bi_from_str("643655234523546426457425672456436456");
 	
 	bi_print(bi1);
 	printf("\n");
